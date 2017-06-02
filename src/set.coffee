@@ -8,6 +8,8 @@ if path? && reference? && value?
     root = current = yield YAML.read path
     [keys..., last] = reference.split "."
     for key in keys
+      if typeof current[key] == 'undefined'
+        current[key] = {}
       current = current[key]
     current[last] = value.join(" ")
     YAML.write root
