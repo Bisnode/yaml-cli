@@ -11,7 +11,10 @@ if path? && reference? && value?
       if typeof current[key] == 'undefined'
         current[key] = {}
       current = current[key]
-    current[last] = value.join(" ")
+    if Array.isArray(current[last])
+      current[last].push(value.join(" "))
+    else
+      current[last] = value.join(" ")
     YAML.write root
 else
   console.error "yaml set: insufficient arguments"

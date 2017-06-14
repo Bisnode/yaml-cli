@@ -58,6 +58,11 @@ Amen.describe "YAML CLI", (context) ->
         yield sh "bin/yaml set test/test.yaml foo.baz.1 goodbye world |
            bin/yaml get - foo.baz.1"
 
+    context.test "append an array element", ->
+      assert.equal 'greetings world',
+        yield sh "bin/yaml set test/test.yaml foo.baz greetings world |
+           bin/yaml get - foo.baz.2"
+
     context.test "read from stdin", ->
       assert.equal '3',
         yield sh "cat test/test.yaml |
