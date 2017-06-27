@@ -1,0 +1,10 @@
+a: zz
+b: ss
+c:
+- item1
+- item2
+d:
+- da: aaa
+  db: bbb
+- da: ccc
+  db: ddd

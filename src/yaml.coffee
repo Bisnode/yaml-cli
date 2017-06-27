@@ -4,9 +4,11 @@ errors = require "./errors"
 
 module.exports =
 
-  read: async (_path) ->
+  read: async (_path, schema) ->
 
     path = if _path == "-" then process.stdin else _path
+    yamlSchema = YAML.DEFAULT_SAFE_SCHEMA
+    if schema is "failsafe" then yamlSchema = YAML.FAILSAFE_SCHEMA
 
     try
       yaml = yield read path
@@ -14,7 +16,7 @@ module.exports =
       errors.readingPath error, path
 
     try
-      data = YAML.safeLoad yaml
+      data = YAML.safeLoad yaml, schema: yamlSchema
     catch error
       errors.parsingYAML error
 

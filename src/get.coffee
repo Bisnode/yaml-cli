@@ -1,11 +1,13 @@
 {call, isDefined, isObject, isArray} = require "fairmont"
 YAML = require "./yaml"
 
-[path, reference] = process.argv[2..]
+[path, reference, extra] = process.argv[2..]
+
+if extra is "--string" then schema = "failsafe" else schema = undefined
 
 if path? && reference?
   call ->
-    root = current = yield YAML.read path
+    root = current = yield YAML.read path, schema
     [keys..., last] = reference.split "."
     for key in keys
       current = current[key]
@@ -13,5 +15,5 @@ if path? && reference?
     YAML.write result
 else
   console.error "yaml get: insufficient arguments"
-  console.error "yaml get <path> <reference>"
+  console.error "yaml get <path> <reference> [--string]"
   process.exit -1
