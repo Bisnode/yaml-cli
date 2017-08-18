@@ -12,6 +12,9 @@ if path? && reference?
     for key in keys
       current = current[key]
     result = current[last]
+    if typeof result is 'undefined'
+      console.error "Unable to get key #{reference}"
+      process.exit 1
     YAML.write result
 else
   console.error "yaml get: insufficient arguments"
