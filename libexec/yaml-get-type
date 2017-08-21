@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# Usage: yaml get-type <yaml-file> <reference>
+# Summary: Get value type from a YAML file
+# Help: Get value type from a YAML file using a dot-notation reference.
+#
+#    yaml get-type test.yaml foo.bar
+#
+# Array references use the same notation, but with numeric keys.
+#
+#    yaml get-type test.yaml foo.baz.1
+#
+# Posisible types.
+#
+#    bool   a boolean
+#    str    a string
+#    int    an integer
+#    float  a float
+#    seq    an array
+#    map    an object
+exec node $_YAML_ROOT/lib/get-type.js $@
