@@ -29,6 +29,7 @@ module.exports =
         if (isObject data)
           try
             YAML.safeDump data
+              .slice 0, -1
           catch error
             errors.formatYAML error
         else if (isArray data)
